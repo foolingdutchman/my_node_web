@@ -4,7 +4,7 @@ var app = express();
 //  主页输出 "Hello World"
 app.get('/', function (req, res) {
    console.log("主页 GET 请求");
-   res.send('Hello GET');
+   res.sendfile(__dirname+'/html/index.html');
 })
  
  
