@@ -2215,12 +2215,12 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .banner-area {
-	background: url(../img/banner_bg1.jpeg) center;
+	background: url(../img/banner_bg2.png) center;
 	background-size: cover
 }
 
 .banner-area .overlay-bg {
-	background: rgba(0,0,0,.89)
+	background: rgba(0,0,0,.90)
 }
 
 .banner-content {
