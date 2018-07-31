@@ -1,10 +1,9 @@
     // -------   Mail Send ajax
-
      $(document).ready(function() {
         var form = $('#myForm'); // contact form
         var submit = $('.submit-btn'); // submit button
         var alert = $('.alert-msg'); // alert div for show alert message
-
+        
         // form submit event
         form.on('submit', function(e) {
             e.preventDefault(); // prevent default form submit
@@ -15,13 +14,13 @@
                 dataType: 'html', // request type html/json/xml
                 data: form.serialize(), // serialize form data
                 beforeSend: function() {
-                    alertMsg("发送成功！")
+                    // alertMsg("发送成功！")
                     // alert.fadeOut();
                     // submit.html('Sending....'); // change submit button text
                    
                 },
                 success: function(data) {
-                    savedata(data)
+                    savedata(data);
                     // alert.html(data).fadeIn(); // fade in response data
                     // form.trigger('reset'); // reset form
                     // submit.attr("style", "display: none !important");; // reset submit button text
@@ -61,5 +60,9 @@
         })
     }
     function savedata(data){
-        alertMsg(data.fname+","+data.email+","+data.message) 
+        var message=JSON.parse(data);
+        alertMsg("Hi"+message.fname+",你的信息已收到，谢谢支持！");
+
     }
+    
+ 
