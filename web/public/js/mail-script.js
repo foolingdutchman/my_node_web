@@ -20,6 +20,7 @@
                    
                 },
                 success: function(data) {
+                    console.log(data); 
                     savedata(data);
                     // alert.html(data).fadeIn(); // fade in response data
                     // form.trigger('reset'); // reset form
@@ -60,7 +61,7 @@
         })
     }
     function savedata(data){
-        var message=JSON.parse(data);
+        // var message=JSON.parse(data);
         alertMsg(message);
 //  alertMsg("Hi"+message.fname+",你的信息已收到，谢谢支持！");
     }

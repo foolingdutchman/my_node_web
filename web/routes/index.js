@@ -17,8 +17,8 @@ var response={
 "code":200,
 "data":body
 }
-replyEmail(body);
-res.send(response);
+// replyEmail(body);
+res.send(body);
 });
    function replyEmail(data){
         var message=JSON.parse(data);
@@ -40,28 +40,28 @@ res.send(response);
   //   }
   // });
 
-    let transporter = nodemailer.createTransport({
-        host: 'smtp.163.com',
-        port: 465,
-        secure: true,
-        auth: {
-        user: 'dfinity_buzz@163.com', //邮箱的账号
-        pass: 'hehao1987'//邮箱的密码
-        }
-    });
-    let mailOptions = {
-        from: '"Fred Foo 👻" <dfinity_buzz@163.com>', //邮件来源
-        to: message.email, //邮件发送到哪里，多个邮箱使用逗号隔开
-        subject: 'Re:'+message.message, // 邮件主题
-        text: 'Hello world ?', // 存文本类型的邮件正文
-        html: '<b>Hello world ?</b>' // html类型的邮件正文
-    };
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-        return console.log(error);
-        }
-        console.log('Message %s sent: %s', info.messageId, info.response);
-    });
+    // let transporter = nodemailer.createTransport({
+    //     host: 'smtp.163.com',
+    //     port: 465,
+    //     secure: true,
+    //     auth: {
+    //     user: 'dfinity_buzz@163.com', //邮箱的账号
+    //     pass: 'hehao1987'//邮箱的密码
+    //     }
+    // });
+    // let mailOptions = {
+    //     from: '"Fred Foo 👻" <dfinity_buzz@163.com>', //邮件来源
+    //     to: message.email, //邮件发送到哪里，多个邮箱使用逗号隔开
+    //     subject: 'Re:'+message.message, // 邮件主题
+    //     text: 'Hello world ?', // 存文本类型的邮件正文
+    //     html: '<b>Hello world ?</b>' // html类型的邮件正文
+    // };
+    // transporter.sendMail(mailOptions, (error, info) => {
+    //     if (error) {
+    //     return console.log(error);
+    //     }
+    //     console.log('Message %s sent: %s', info.messageId, info.response);
+    // });
     }
 
 module.exports = router;
