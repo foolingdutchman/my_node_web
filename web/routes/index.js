@@ -17,13 +17,16 @@ var response={
 "code":200,
 "data":body
 }
+  var message=JSON.parse(body);
+        // alertMsg("Hi"+message.fname+",你的信息已收到，谢谢支持！");
+        console.log('name ' + message.fname+' email '+message.email); 
 // replyEmail(body);
 res.send(body);
 });
    function replyEmail(data){
         var message=JSON.parse(data);
         // alertMsg("Hi"+message.fname+",你的信息已收到，谢谢支持！");
-        console.log('name ' + data.from+' email '+message.email); 
+        console.log('name ' + message.fname+' email '+message.email); 
   //   global.Models.users.create({name: message.fname, email: message.email, message: message.message}).exec(function(err, users) {
   //   if (err) {
   //       console.log('err ' + err) ;
