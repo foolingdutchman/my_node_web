@@ -11,18 +11,35 @@ var body=  req.body;
 // var jsonbody=JSON.parse(body);
 // jsonbody.fname;
 console.log(body);
-res.send(body);
+// res.send(body);
 var response={
 "is_success":true,
 "code":200,
 "data":body
 }
 replyEmail(body);
-res.send(body);
+res.send(response);
 });
    function replyEmail(data){
         var message=JSON.parse(data);
-        alertMsg("Hi"+message.fname+",你的信息已收到，谢谢支持！");
+        // alertMsg("Hi"+message.fname+",你的信息已收到，谢谢支持！");
+        console.log('name ' + data.from+' email '+message.email); 
+  //   global.Models.users.create({name: message.fname, email: message.email, message: message.message}).exec(function(err, users) {
+  //   if (err) {
+  //       console.log('err ' + err) ;
+  //     res.status(500).json({error: 'Error when trying to create user.'});
+  //   }
+  //   if (users) {
+  //     console.log('Users id ' + users.id);
+  //     // succesful, so render
+  //     // res.render('user_detail', {
+  //     //   title: 'Details of the User Created',
+  //     //   user_detail: users
+  //     // });
+  //   //   res.send(message);
+  //   }
+  // });
+
     let transporter = nodemailer.createTransport({
         host: 'smtp.163.com',
         port: 465,

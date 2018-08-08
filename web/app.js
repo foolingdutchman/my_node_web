@@ -9,6 +9,21 @@ var enRouter = require('./routes/en');
 var usersRouter = require('./routes/users');
 
 var app = express();
+//Setup Waterline ORM connection
+var waterLconnect = require('./config/connections');
+var models = require('./models');
+
+models.waterline.initialize(waterLconnect, function(err, models) {
+  if (err)
+    throw err;
+
+  //console.log(models.collections.users);
+  //console.log(waterLconnect.connections);
+  global.Models = app.models = models.collections;
+  //app.models = models.collections;
+  app.connections = waterLconnect.connections;
+
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

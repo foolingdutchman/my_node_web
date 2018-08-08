@@ -61,8 +61,8 @@
     }
     function savedata(data){
         var message=JSON.parse(data);
-        alertMsg("Hi"+message.fname+",你的信息已收到，谢谢支持！");
-
+        alertMsg(message);
+//  alertMsg("Hi"+message.fname+",你的信息已收到，谢谢支持！");
     }
     
  
