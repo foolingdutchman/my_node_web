@@ -5,6 +5,14 @@ var nodemailer = require('nodemailer');
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
+router.get('/admin', function(req, res, next) {
+  //  res.redirect('/login');
+  res.redirect('/users/read');
+});
+router.get('/login', function(req, res, next) {
+   res.render('login', { title: 'LogIn' });
+});
+
 
 router.post('/',function(req, res, next){
 var body=  req.body;
@@ -22,26 +30,6 @@ var response={
 
 res.send(body);
 });
-   function replyEmail(meesage){
-      
-    global.Models.users.create({name: message.fname, email: message.email, message: message.message}).exec(function(err, users) {
-    if (err) {
-        console.log('err ' + err) ;
-      res.status(500).json({error: 'Error when trying to create user.'});
-    }
-    if (users) {
-      console.log('Users id ' + users.id);
-      // succesful, so render
-      // res.render('user_detail', {
-      //   title: 'Details of the User Created',
-      //   user_detail: users
-      // });
-    //   res.send(message);
-    }
-  });
-
-   
-    }
 
 module.exports = router;
 

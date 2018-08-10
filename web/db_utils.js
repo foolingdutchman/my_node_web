@@ -19,7 +19,7 @@ con.query("CREATE DATABASE waterline_orm; USE waterline_orm; CREATE TABLE users 
 });
 
 //Fill table in with some users
-var sqlInto = "USE waterline_orm; INSERT INTO users (name, email,message) VALUES ?";
+var sqlInto = "USE waterline_orm; INSERT INTO users (name, email,message,creat_at) VALUES ?";
 var values = [['Demian', 'Demon@hello.com','hello world! ',new Date()],['John', 'Doe@John.com','a node',new Date()],['Mark', 'Pontus@Mark.com','nice to meet you',new Date()]];
 con.query(sqlInto, [values], function(err, result) {
   if (err) {

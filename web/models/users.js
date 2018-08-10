@@ -7,7 +7,8 @@ module.exports = Waterline.Collection.extend({
   attributes: {
     name: 'string',
     email: 'string',
-    message:'string'
+    message:'string',
+    time: 'datetime'
   }
 });
 

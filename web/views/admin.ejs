@@ -1,3 +1,10 @@
 <%- include header %>
-这是主页
+<% user_list.forEach(function (user, index) { %>
+  <p><h2><a href="#"><%= user.name %></a></h2></p>
+  <p class="info">
+    邮箱：<a href="#"><%= user.email %></a> | 
+    日期：<%= user.creat_at %>
+  </p>
+  <p><%- user.message %></p>
+<% }) %>
 <%- include footer %>

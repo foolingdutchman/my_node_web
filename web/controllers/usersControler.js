@@ -30,7 +30,7 @@ module.exports.users_list = (req, res, next) => {
    */
     if (users) {
       // succesful, so render
-      res.render('user_list', {
+      res.render('admin', {
         title: 'Users List',
         user_list: users
       });
@@ -46,6 +46,7 @@ module.exports.user_create_get = (req, res, next) => {
 // Create users
 module.exports.user_create_post = (req, res, next) => {
     // res.send(req.body);
+    //寻找user
   global.Models.users.create({name: req.body.fname, email: req.body.email, message: req.body.message}).exec(function(err, users) {
     if (err) {
       res.status(500).json({error: 'Error when trying to create user.'});
