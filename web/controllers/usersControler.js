@@ -66,7 +66,7 @@ module.exports.user_create_post = (req, res, next) => {
         to: users.email, //邮件发送到哪里，多个邮箱使用逗号隔开
         subject: 'Re:'+users.message, // 邮件主题
         text: 'Hello,'+users.name+','+'\r\n thanks for your support, we will read your message and contact you if it is needed. \r\n Let\'s keep in touch! \r\n Dfinity Buzz Lightyear ', // 存文本类型的邮件正文
-        html: '<b>Hello,'+users.name+'</b>\r\n <b>thanks for your support, we will read your message and contact you if it is needed. </b>\r\n <b>Let\'s keep in touch! </b>\r\n <b>Dfinity Buzz Lightyear</b>' // html类型的邮件正文
+        html: '<b>Hello,'+users.name+'</b> <br/> thanks for your support, we will read your message and contact you if it is needed.  <br/>  Let\'s keep in touch! <br/>  <b>Dfinity Buzz Lightyear</b>' // html类型的邮件正文
     };
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
