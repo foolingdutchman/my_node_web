@@ -1,5 +1,5 @@
 var debug = require('debug')('users'); //https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/deployment#Log_appropriately
-
+var nodemailer = require('nodemailer');
 //Users amount
 module.exports.index = (req, res, next) => {
   global.Models.users.count().exec(function(err, users) {
@@ -45,23 +45,43 @@ module.exports.user_create_get = (req, res, next) => {
 
 // Create users
 module.exports.user_create_post = (req, res, next) => {
-   var message=JSON.parse(req.body);
-    console.log('Users name ' + message.fname+'user email'+message.email);
-    res.send(message);
-  // global.Models.users.create({name: message.fname, email: message.email, message: message.message}).exec(function(err, users) {
-  //   if (err) {
-  //     res.status(500).json({error: 'Error when trying to create user.'});
-  //   }
-  //   if (users) {
-  //     console.log('Users id ' + users.id)
-  //     // succesful, so render
-  //     // res.render('user_detail', {
-  //     //   title: 'Details of the User Created',
-  //     //   user_detail: users
-  //     // });
-  //     res.send(message);
-  //   }
-  // });
+    // res.send(req.body);
+  global.Models.users.create({name: req.body.fname, email: req.body.email, message: req.body.message}).exec(function(err, users) {
+    if (err) {
+      res.status(500).json({error: 'Error when trying to create user.'});
+    }
+    if (users) {
+      console.log('Users id ' + users.id)
+           let transporter = nodemailer.createTransport({
+        host: 'smtp.163.com',
+        port: 465,
+        secure: true,
+        auth: {
+        user: 'dfinity_buzz@163.com', //邮箱的账号
+        pass: 'hehao1987'//邮箱的密码
+        }
+    });
+    let mailOptions = {
+        from: '"dfinity_buzz👻" <dfinity_buzz@163.com>', //邮件来源
+        to: users.email, //邮件发送到哪里，多个邮箱使用逗号隔开
+        subject: 'Re:'+users.message, // 邮件主题
+        text: 'Hello,'+users.name+','+'\r\n thanks for your support, we will read your message and contact you if it is needed. \r\n Let\'s keep in touch! \r\n Dfinity Buzz Lightyear ', // 存文本类型的邮件正文
+        html: '<b>Hello,+'+users.name+'</b>\r\n <b>thanks for your support, we will read your message and contact you if it is needed. </b>\r\n <b>Let\'s keep in touch! </b>\r\n <b>Dfinity Buzz Lightyear</b>' // html类型的邮件正文
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+        return console.log(error);
+        }
+        console.log('Message %s sent: %s', info.messageId, info.response);
+    });
+      // succesful, so render
+      // res.render('user_detail', {
+      //   title: 'Details of the User Created',
+      //   user_detail: users
+      // });
+      res.send(req.body);
+    }
+  });
 };
 
 // Display User to delete on GET
