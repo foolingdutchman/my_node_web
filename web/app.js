@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var session = require('express-session');
 var indexRouter = require('./routes/index');
 var enRouter = require('./routes/en');
 var usersRouter = require('./routes/users');
@@ -17,7 +17,8 @@ models.waterline.initialize(waterLconnect, function(err, models) {
   if (err)
     throw err;
 
-  //console.log(models.collections.users);
+  // console.log(models.collections.users);
+  // console.log(models.collections.unique_users);
   //console.log(waterLconnect.connections);
   global.Models = app.models = models.collections;
   //app.models = models.collections;
@@ -38,7 +39,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/en', enRouter);
-
+app.use(session({
+    secret :  'secret', // 对session id 相关的cookie 进行签名
+    resave : true,
+    saveUninitialized: false, // 是否保存未初始化的会话
+    cookie : {
+        maxAge : 1000 * 60 * 10, // 设置 session 的有效时间，单位毫秒
+    },
+}));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

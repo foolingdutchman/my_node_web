@@ -1,13 +1,13 @@
 var Waterline = require('waterline');
 
 module.exports = Waterline.Collection.extend({
-  identity:'users',
+  identity:'unique_users',
   connection:'mysql',
 
   attributes: {
     name: 'string',
     email: 'string',
-    time: 'datetime'
+    create_at: 'datetime'
   }
 });
 

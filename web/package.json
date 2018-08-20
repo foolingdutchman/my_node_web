@@ -17,6 +17,8 @@
     "sails-mysql": "^0.11.5",
     "serve-favicon": "~2.4.2",
     "association": "^1.0.5",
+    "moment": "^2.10.0",
+    "express-session": "1.15.6",
     "waterline": "^0.11.11"
   },
   "devDependencies": {

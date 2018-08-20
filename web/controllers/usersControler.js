@@ -1,5 +1,6 @@
 var debug = require('debug')('users'); //https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/deployment#Log_appropriately
 var nodemailer = require('nodemailer');
+var moment = require('moment');
 //Users amount
 module.exports.index = (req, res, next) => {
   global.Models.users.count().exec(function(err, users) {
@@ -47,7 +48,25 @@ module.exports.user_create_get = (req, res, next) => {
 module.exports.user_create_post = (req, res, next) => {
     // res.send(req.body);
     //寻找user
-  global.Models.users.create({name: req.body.fname, email: req.body.email, message: req.body.message}).exec(function(err, users) {
+    console.log(global.Models.unique_users);
+    global.Models.unique_users.findOne({email: req.body.email}).exec(function(err, user) {
+    if (err) {
+      res.status(500).json({error: 'Error when trying to find user.'});
+    }
+    if (!user) {
+      // succesful, so render
+     global.Models.unique_users.create({name: req.body.fname, email: req.body.email, create_at: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}).exec(function(err, users) {
+    if (err) {
+      res.status(500).json({error: 'Error when trying to create user.'});
+    }
+    if (users) {
+      console.log('unique_user id ' + users.id) 
+    }
+  });
+    }
+  });
+
+  global.Models.users.create({name: req.body.fname, email: req.body.email, message: req.body.message,create_at: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}).exec(function(err, users) {
     if (err) {
       res.status(500).json({error: 'Error when trying to create user.'});
     }
