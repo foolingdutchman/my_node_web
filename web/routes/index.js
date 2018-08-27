@@ -28,14 +28,36 @@ router.get('/admin', function(req, res, next) {
     }
   });
 });
+
+router.get('/edit', function(req, res, next) {
+  console.log(req.session);
+  if(!req.session||!req.session.username){
+    req.session.from='/edit';
+     res.redirect('/login');
+  };
+   res.render('edit',{ title: 'Edit' })
+  
+});
+
+
 router.get('/login', function(req, res, next) {
    res.render('login', { title: 'LogIn' });
 });
 
+router.get('/logout', function(req, res, next) {
+   req.session.username=null;
+    res.redirect('/login');
+});
+
+
 router.post('/login', function(req, res, next) {
     if(req.body.name == 'admin' && req.body.password == 'admin123'){
         req.session.username = req.body.name; // 登录成功，设置 session
-        res.redirect('/admin');
+        if(req.session.from){
+        res.redirect(req.session.from);
+        req.session.from=null;
+        }
+       else  res.redirect('/admin');
     }
     else{
         res.json({ret_code : 1, ret_msg : '账号或密码错误'});// 若登录失败，重定向到登录页面
