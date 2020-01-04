@@ -8,7 +8,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/',function(req, res, next){
 var body=  req.body;
-alert("request:"+ body);
+console.log(body);
+res.send("您的信息已收到，我们会尽快与您联系！");
 });
 
 module.exports = router;

@@ -2215,7 +2215,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .banner-area {
-	background: url(../img/banner_bg2.png) center;
+	background: url(../img/banner_bg3.png) center;
 	background-size: cover
 }
 
@@ -2505,7 +2505,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .single-testimonial {
 	text-align: center;
 	padding: 30px;
-	border-radius: 10px;
+	border-radius: 1px;
 	background: #f9f9ff;
 	text-align: center;
 	border: 1px solid #eee;
